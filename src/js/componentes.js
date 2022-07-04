@@ -72,19 +72,27 @@ clearCompleted.addEventListener('click', () => {
 });
 
 filtros[0].addEventListener('click', () => {
+  const todosHtml = document.querySelectorAll('.todo-list li');
+  console.log(todosHtml);
   console.log('Mostrar todos');
-  console.log(todoList);
-  divTodoList.innerHTML = '';
-  todoList.todos.forEach( todo => {
-    crearTodoHtml(todo);
+  todosHtml.forEach( todo => {
+    todo.classList.remove('hidden');
   });
+  // console.log(todoList);
+  // divTodoList.innerHTML = '';
+  // todoList.todos.forEach( todo => {
+  //   console.log(todo);
+  //   crearTodoHtml(todo);
+  // });
 });
 
 filtros[1].addEventListener('click', () => {
   const allTodos = document.querySelectorAll('li');
   allTodos.forEach( todo => {
     if(todo.classList.contains('completed')) {
-      divTodoList.removeChild(todo);
+      todo.classList.add('hidden');
+    } else {
+      todo.classList.remove('hidden');
     }
   });
 });
@@ -95,8 +103,9 @@ filtros[2].addEventListener('click', () => {
     if(!todo.classList.contains('completed') && 
         !todo.lastElementChild.classList.contains('selected') &&
         !todo.lastElementChild.classList.contains('filtro')) {
-      console.log(todo);
-      divTodoList.removeChild(todo);
+      todo.classList.add('hidden');
+    } else {
+      todo.classList.remove('hidden');
     }
   });
 });
